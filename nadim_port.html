@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #6b21a8 50%, #1e293b 100%);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #c084fc, #f9a8d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c084fc;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 20px 100px;
+            text-align: left;
+        }
+
+        .hero-icon {
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #c084fc, #f9a8d4, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .hero .subtitle {
+            font-size: 2rem;
+            color: #d8b4fe;
+            margin-bottom: 1rem;
+        }
+
+        .hero .description {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #9333ea;
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+        }
+
+        .btn-secondary {
+            background: #db2777;
+        }
+
+        .btn-secondary:hover {
+            background: #be185d;
+        }
+
+        .btn-tertiary {
+            background: #2563eb;
+        }
+
+        .btn-tertiary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-alt {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: #c084fc;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: #d1d5db;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .education-card {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .education-card h3 {
+            color: #c084fc;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-item {
+            margin-bottom: 1rem;
+        }
+
+        .education-item p:first-child {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .education-item p:nth-child(2) {
+            color: #9ca3af;
+        }
+
+        .education-item p:last-child {
+            color: #6b7280;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .skill-percentage {
+            color: #c084fc;
+        }
+
+        .skill-bar {
+            height: 12px;
+            background: #1e293b;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(to right, #9333ea, #ec4899);
+            border-radius: 999px;
+            transition: width 1s ease-out;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.5), rgba(219, 39, 119, 0.5));
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            transition: all 0.3s;
+        }
+
+        .achievement-card:hover {
+            border-color: #c084fc;
+            transform: translateY(-5px);
+        }
+
+        .achievement-icon {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #c084fc;
+            transform: scale(1.05);
+        }
+
+        .project-card h3 {
+            color: #d8b4fe;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(147, 51, 234, 0.5);
+            color: #d8b4fe;
+            border-radius: 999px;
+            font-size: 0.875rem;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.4));
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #9333ea, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .blog-card:hover {
+            border-color: #c084fc;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3);
+        }
+
+        .blog-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #c084fc;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 0.5rem;
+            width: fit-content;
+        }
+
+        .blog-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        .blog-card:hover h3 {
+            color: #d8b4fe;
+        }
+
+        .blog-excerpt {
+            color: #d1d5db;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            font-size: 1rem;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-tag {
+            padding: 0.4rem 0.9rem;
+            background: rgba(147, 51, 234, 0.3);
+            color: #d8b4fe;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .blog-tag:hover {
+            background: rgba(147, 51, 234, 0.5);
+            border-color: #c084fc;
+            transform: translateY(-2px);
+        }
+
+        .blog-read-more {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-read-more:hover {
+            color: #d8b4fe;
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+        }
+
+        .contact-email {
+            font-size: 1.5rem;
+            color: #c084fc;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: color 0.3s;
+        }
+
+        .contact-email:hover {
+            color: #d8b4fe;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: #c084fc;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 20px;
+            text-align: center;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            color: #9ca3af;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-icon">
+                <i data-lucide="code" width="48" height="48" color="#c084fc"></i>
+            </div>
+            <h1>Your Name</h1>
+            <p class="subtitle">Competitive Programmer & ICT Student</p>
+            <p class="description">3rd Year Student at MBSTU ICT Department | Passionate about Problem Solving</p>
+            <div class="btn-group">
+                <a href="https://github.com/yourusername" class="btn btn-primary" target="_blank">
+                    <i data-lucide="github" width="20" height="20"></i>
+                    GitHub
+                </a>
+                <a href="https://codeforces.com/profile/yourusername" class="btn btn-secondary" target="_blank">
+                    <i data-lucide="external-link" width="20" height="20"></i>
+                    Codeforces
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="btn btn-tertiary" target="_blank">
+                    <i data-lucide="linkedin" width="20" height="20"></i>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-alt">
+        <div class="container">
+            <h2 class="section-title">
+                <i data-lucide="book-open" width="40" height="40"></i>
+                About Me
+            </h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I'm a third-year student at Mawlana Bhashani Science and Technology University, 
+                        majoring in Information and Communication Technology. My passion lies in competitive 
+                        programming and solving complex algorithmic challenges.
+                    </p>
+                    <p>
+                        I actively participate in programming contests and constantly work on improving my 
+                        problem-solving skills. I enjoy learning new algorithms and data structures, and 
+                        applying them to real-world problems.
+                    </p>
+                </div>
+                <div class="education-card">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <p>BSc in ICT</p>
+                        <p>Mawlana Bhashani Science and Technology University</p>
+                        <p>2022 - Present (3rd Year)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">
+                <i data-lucide="code" width="40" height="40"></i>
+                Technical Skills
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">C++</span>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Data Structures</span>
+                        <span class="skill-percentage">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Algorithms</span>
+                        <span class="skill-percentage">87%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 87%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Problem Solving</span>
+                        <span class="skill-percentage">92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-percentage">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section-alt">
+        <div class="container">
+            <h2 class="section-title">
+                <i data-lucide="trophy" width="40" height="40"></i>
+                Achievements
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i data-lucide="trophy" width="32" height="32"></i>
+                    </div>
+                    <p>Codeforces Rating: 1600+ (Specialist)</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i data-lucide="trophy" width="32" height="32"></i>
+                    </div>
+                    <p>Solved 800+ problems across multiple platforms</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i data-lucide="trophy" width="32" height="32"></i>
+                    </div>
+                    <p>ICPC Regional Participant 2024</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i data-lucide="trophy" width="32" height="32"></i>
+                    </div>
+                    <p>Winner - MBSTU Intra University Programming Contest</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i data-lucide="trophy" width="32" height="32"></i>
+                    </div>
+                    <p>Top 10 in National Collegiate Programming Contest</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">
+                <i data-lucide="code" width="40" height="40"></i>
+                Projects
+            </h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Graph Algorithm Visualizer</h3>
+                    <p class="project-description">Interactive tool to visualize graph algorithms like BFS, DFS, and Dijkstra</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">D3.js</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Competitive Programming Solutions</h3>
+                    <p class="project-description">Collection of 500+ solved problems from Codeforces, CodeChef, and UVa</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">Algorithms</span>
+                        <span class="tech-tag">Data Structures</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Student Management System</h3>
+                    <p class="project-description">Full-stack web application for academic administration</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section-alt">
+        <div class="container">
+            <h2 class="section-title">
+                <i data-lucide="pen-tool" width="40" height="40"></i>
+                Blog Posts
+            </h2>
+            <div class="blog-grid" id="blogGrid">
+                <!-- Sample blog posts - Replace with your actual posts -->
+                <article class="blog-card">
+                    <div class="blog-date">
+                        <i data-lucide="calendar" width="16" height="16"></i>
+                        November 25, 2024
+                    </div>
+                    <h3>Understanding Dynamic Programming: A Beginner's Guide</h3>
+                    <p class="blog-excerpt">
+                        Dynamic programming is one of the most powerful techniques in competitive programming. 
+                        In this post, I'll break down the core concepts and show you how to approach DP problems...
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Algorithms</span>
+                        <span class="blog-tag">Competitive Programming</span>
+                        <span class="blog-tag">Tutorial</span>
+                    </div>
+                    <a href="#" class="blog-read-more">
+                        Read More
+                        <i data-lucide="arrow-right" width="16" height="16"></i>
+                    </a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">
+                        <i data-lucide="calendar" width="16" height="16"></i>
+                        November 18, 2024
+                    </div>
+                    <h3>My Journey to ICPC Regionals</h3>
+                    <p class="blog-excerpt">
+                        Participating in ICPC was a dream come true. Here's my experience preparing for the 
+                        regionals, the challenges I faced, and the lessons I learned along the way...
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">ICPC</span>
+                        <span class="blog-tag">Experience</span>
+                        <span class="blog-tag">Competitive Programming</span>
+                    </div>
+                    <a href="port_post.html" class="blog-read-more">
+                        Read More
+                        <i data-lucide="arrow-right" width="16" height="16"></i>
+                    </a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">
+                        <i data-lucide="calendar" width="16" height="16"></i>
+                        November 10, 2024
+                    </div>
+                    <h3>Top 10 Graph Algorithms Every Programmer Should Know</h3>
+                    <p class="blog-excerpt">
+                        Graph algorithms are fundamental in computer science. From BFS and DFS to Dijkstra's 
+                        algorithm, here are the essential graph algorithms you need to master...
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Algorithms</span>
+                        <span class="blog-tag">Data Structures</span>
+                        <span class="blog-tag">Tutorial</span>
+                    </div>
+                    <a href="#" class="blog-read-more">
+                        Read More
+                        <i data-lucide="arrow-right" width="16" height="16"></i>
+                    </a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">
+                        <i data-lucide="calendar" width="16" height="16"></i>
+                        November 3, 2024
+                    </div>
+                    <h3>How I Improved My Codeforces Rating by 400 Points</h3>
+                    <p class="blog-excerpt">
+                        Improving your competitive programming rating takes dedication and the right strategy. 
+                        Here are the key techniques and practice methods that helped me grow...
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Codeforces</span>
+                        <span class="blog-tag">Tips & Tricks</span>
+                        <span class="blog-tag">Personal Growth</span>
+                    </div>
+                    <a href="#" class="blog-read-more">
+                        Read More
+                        <i data-lucide="arrow-right" width="16" height="16"></i>
+                    </a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">
+                        <i data-lucide="calendar" width="16" height="16"></i>
+                        October 28, 2024
+                    </div>
+                    <h3>Building a Graph Visualizer with JavaScript</h3>
+                    <p class="blog-excerpt">
+                        Creating visual tools can deepen your understanding of algorithms. In this tutorial, 
+                        I'll show you how to build an interactive graph algorithm visualizer from scratch...
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Web Development</span>
+                        <span class="blog-tag">JavaScript</span>
+                        <span class="blog-tag">Project</span>
+                    </div>
+                    <a href="#" class="blog-read-more">
+                        Read More
+                        <i data-lucide="arrow-right" width="16" height="16"></i>
+                    </a>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-date">
+                        <i data-lucide="calendar" width="16" height="16"></i>
+                        October 20, 2024
+                    </div>
+                    <h3>Time Complexity Analysis: Beyond Big O Notation</h3>
+                    <p class="blog-excerpt">
+                        Understanding time complexity is crucial for writing efficient code. Let's dive deeper 
+                        into complexity analysis and learn how to optimize your algorithms...
+                    </p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Algorithms</span>
+                        <span class="blog-tag">Theory</span>
+                        <span class="blog-tag">Tutorial</span>
+                    </div>
+                    <a href="#" class="blog-read-more">
+                        Read More
+                        <i data-lucide="arrow-right" width="16" height="16"></i>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section-alt">
+        <div class="container">
+            <h2 class="section-title" style="justify-content: center;">
+                <i data-lucide="mail" width="40" height="40"></i>
+                Get In Touch
+            </h2>
+            <p>I'm always open to discussing new projects, opportunities, or collaborations.</p>
+            <a href="mailto:your.email@example.com" class="contact-email">your.email@example.com</a>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                    <i data-lucide="github" width="32" height="32"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                    <i data-lucide="linkedin" width="32" height="32"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2024 Your Name. Built with HTML, CSS & JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.style.width;
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+    </script>
+</body>
+</html>

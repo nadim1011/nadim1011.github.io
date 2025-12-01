@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Title - Your Name</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #6b21a8 50%, #1e293b 100%);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #c084fc, #f9a8d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            background: rgba(147, 51, 234, 0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(147, 51, 234, 0.5);
+            color: #c084fc;
+        }
+
+        /* Blog Header */
+        .blog-header {
+            padding: 120px 20px 60px;
+            text-align: center;
+        }
+
+        .blog-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(147, 51, 234, 0.3);
+            border-radius: 999px;
+            color: #d8b4fe;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #c084fc, #f9a8d4, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-tags-header {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 0.9rem;
+            background: rgba(147, 51, 234, 0.3);
+            color: #d8b4fe;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+        }
+
+        /* Blog Content */
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.4));
+            padding: 3rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .blog-content h2 {
+            color: #d8b4fe;
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .blog-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .blog-content h3 {
+            color: #c084fc;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-content p {
+            color: #d1d5db;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content ul, .blog-content ol {
+            color: #d1d5db;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            margin-left: 2rem;
+        }
+
+        .blog-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-content code {
+            background: rgba(15, 23, 42, 0.8);
+            color: #f9a8d4;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .blog-content pre {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .blog-content pre code {
+            background: none;
+            padding: 0;
+            color: #d1d5db;
+        }
+
+        .blog-content blockquote {
+            border-left: 4px solid #9333ea;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            color: #c084fc;
+            font-style: italic;
+            background: rgba(147, 51, 234, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .blog-content img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(219, 39, 119, 0.3));
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            margin: 2rem 0;
+        }
+
+        .highlight-box h4 {
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Author Section */
+        .author-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        .author-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.4));
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .author-info h3 {
+            color: #d8b4fe;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-info p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .author-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .author-link {
+            color: #c084fc;
+            transition: color 0.3s;
+        }
+
+        .author-link:hover {
+            color: #d8b4fe;
+        }
+
+        /* Related Posts */
+        .related-posts {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+
+        .related-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #d8b4fe;
+            margin-bottom: 2rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(51, 65, 85, 0.4));
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            border-color: #c084fc;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+        }
+
+        .related-card h4 {
+            color: #d8b4fe;
+            margin-bottom: 0.5rem;
+        }
+
+        .related-card p {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 20px;
+            text-align: center;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            color: #9ca3af;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 2rem;
+            }
+
+            .blog-meta {
+                gap: 1rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .blog-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .author-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Portfolio</a>
+            <a href="index.html#blog" class="back-btn">
+                <i data-lucide="arrow-left" width="20" height="20"></i>
+                Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+        <div class="blog-category">
+            <i data-lucide="bookmark" width="16" height="16"></i>
+            Tutorial
+        </div>
+        <h1 class="blog-title">Understanding Dynamic Programming: A Beginner's Guide</h1>
+        <div class="blog-meta">
+            <div class="meta-item">
+                <i data-lucide="calendar" width="20" height="20"></i>
+                November 25, 2024
+            </div>
+            <div class="meta-item">
+                <i data-lucide="clock" width="20" height="20"></i>
+                8 min read
+            </div>
+            <div class="meta-item">
+                <i data-lucide="user" width="20" height="20"></i>
+                Your Name
+            </div>
+        </div>
+        <div class="blog-tags-header">
+            <span class="tag">Algorithms</span>
+            <span class="tag">Competitive Programming</span>
+            <span class="tag">Tutorial</span>
+        </div>
+    </header>
+
+    <!-- Blog Content -->
+    <article class="blog-content">
+        <div class="content-card">
+            <!-- Introduction -->
+            <p>
+                Dynamic Programming (DP) is one of the most powerful problem-solving techniques in competitive 
+                programming and computer science. If you've ever felt overwhelmed by DP problems, you're not alone. 
+                In this comprehensive guide, I'll break down the fundamental concepts and help you build a strong 
+                foundation in dynamic programming.
+            </p>
+
+            <h2>
+                <i data-lucide="lightbulb" width="28" height="28"></i>
+                What is Dynamic Programming?
+            </h2>
+            <p>
+                Dynamic Programming is an algorithmic paradigm that solves complex problems by breaking them down 
+                into simpler subproblems. It stores the results of these subproblems to avoid redundant calculations, 
+                significantly improving efficiency.
+            </p>
+
+            <div class="highlight-box">
+                <h4>
+                    <i data-lucide="zap" width="20" height="20"></i>
+                    Key Insight
+                </h4>
+                <p style="margin: 0;">
+                    DP = Recursion + Memoization. If you can solve a problem recursively and notice overlapping 
+                    subproblems, you can optimize it using DP!
+                </p>
+            </div>
+
+            <h2>
+                <i data-lucide="check-circle" width="28" height="28"></i>
+                When to Use Dynamic Programming
+            </h2>
+            <p>
+                A problem can typically be solved using DP if it has these two properties:
+            </p>
+            <ul>
+                <li><strong>Optimal Substructure:</strong> The optimal solution can be constructed from optimal solutions of its subproblems</li>
+                <li><strong>Overlapping Subproblems:</strong> The problem can be broken down into subproblems that are reused multiple times</li>
+            </ul>
+
+            <h2>
+                <i data-lucide="code" width="28" height="28"></i>
+                Classic Example: Fibonacci Sequence
+            </h2>
+            <p>
+                Let's start with the classic Fibonacci problem to understand DP concepts:
+            </p>
+
+            <h3>Naive Recursive Approach</h3>
+            <pre><code>int fibonacci(int n) {
+    if (n <= 1) return n;
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+// Time Complexity: O(2^n) - Very slow!</code></pre>
+
+            <h3>Dynamic Programming Approach</h3>
+            <pre><code>int fibonacci(int n) {
+    vector&lt;int&gt; dp(n + 1);
+    dp[0] = 0;
+    dp[1] = 1;
+    
+    for (int i = 2; i <= n; i++) {
+        dp[i] = dp[i-1] + dp[i-2];
+    }
+    
+    return dp[n];
+}
+// Time Complexity: O(n) - Much faster!</code></pre>
+
+            <h2>
+                <i data-lucide="trending-up" width="28" height="28"></i>
+                Two Approaches to DP
+            </h2>
+
+            <h3>1. Top-Down (Memoization)</h3>
+            <p>
+                Start with the original problem and break it down recursively, storing results as you go.
+            </p>
+            <pre><code>vector&lt;int&gt; memo(n + 1, -1);
+
+int fibonacci(int n) {
+    if (n <= 1) return n;
+    if (memo[n] != -1) return memo[n];
+    
+    memo[n] = fibonacci(n-1) + fibonacci(n-2);
+    return memo[n];
+}</code></pre>
+
+            <h3>2. Bottom-Up (Tabulation)</h3>
+            <p>
+                Start with the smallest subproblems and build up to the original problem.
+            </p>
+            <pre><code>int fibonacci(int n) {
+    if (n <= 1) return n;
+    
+    int prev2 = 0, prev1 = 1;
+    
+    for (int i = 2; i <= n; i++) {
+        int curr = prev1 + prev2;
+        prev2 = prev1;
+        prev1 = curr;
+    }
+    
+    return prev1;
+}</code></pre>
+
+            <h2>
+                <i data-lucide="target" width="28" height="28"></i>
+                Practice Problems to Get Started
+            </h2>
+            <ol>
+                <li><strong>Climbing Stairs</strong> - Perfect beginner problem on LeetCode</li>
+                <li><strong>Coin Change</strong> - Classic DP problem with multiple variations</li>
+                <li><strong>Longest Common Subsequence</strong> - String DP introduction</li>
+                <li><strong>0/1 Knapsack</strong> - Foundation of many DP problems</li>
+                <li><strong>Edit Distance</strong> - Advanced string DP problem</li>
+            </ol>
+
+            <blockquote>
+                "The best way to learn dynamic programming is through practice. Start with easy problems, 
+                understand the pattern, and gradually move to harder ones." - My experience after solving 100+ DP problems
+            </blockquote>
+
+            <h2>
+                <i data-lucide="book-open" width="28" height="28"></i>
+                Tips for Mastering DP
+            </h2>
+            <ul>
+                <li>Always start by writing the recursive solution first</li>
+                <li>Identify the overlapping subproblems</li>
+                <li>Define your DP state clearly</li>
+                <li>Write down the recurrence relation</li>
+                <li>Practice, practice, practice!</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>
+                    <i data-lucide="trophy" width="20" height="20"></i>
+                    Pro Tip
+                </h4>
+                <p style="margin: 0;">
+                    Spend time understanding the state transition. Once you grasp how one state relates to others, 
+                    writing the code becomes much easier!
+                </p>
+            </div>
+
+            <h2>
+                <i data-lucide="message-circle" width="28" height="28"></i>
+                Conclusion
+            </h2>
+            <p>
+                Dynamic Programming might seem intimidating at first, but with consistent practice and the right 
+                approach, you'll start recognizing DP patterns in problems. Remember, every expert was once a beginner!
+            </p>
+            <p>
+                In my next post, I'll cover advanced DP techniques like digit DP and bitmask DP. Stay tuned!
+            </p>
+        </div>
+    </article>
+
+    <!-- Author Section -->
+    <section class="author-section">
+        <div class="author-card">
+            <div class="author-avatar">YN</div>
+            <div class="author-info">
+                <h3>Your Name</h3>
+                <p>
+                    3rd Year ICT Student at MBSTU | Competitive Programmer | 
+                    Passionate about algorithms and problem solving
+                </p>
+                <div class="author-links">
+                    <a href="https://github.com/yourusername" class="author-link" target="_blank">
+                        <i data-lucide="github" width="24" height="24"></i>
+                    </a>
+                    <a href="https://codeforces.com/profile/yourusername" class="author-link" target="_blank">
+                        <i data-lucide="code" width="24" height="24"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="author-link" target="_blank">
+                        <i data-lucide="linkedin" width="24" height="24"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <h2 class="related-title">Related Posts</h2>
+        <div class="related-grid">
+            <a href="#" class="related-card">
+                <div class="meta-item" style="margin-bottom: 0.5rem;">
+                    <i data-lucide="calendar" width="16" height="16"></i>
+                    November 18, 2024
+                </div>
+                <h4>My Journey to ICPC Regionals</h4>
+                <p>Participating in ICPC was a dream come true. Here's my experience...</p>
+            </a>
+            <a href="#" class="related-card">
+                <div class="meta-item" style="margin-bottom: 0.5rem;">
+                    <i data-lucide="calendar" width="16" height="16"></i>
+                    November 10, 2024
+                </div>
+                <h4>Top 10 Graph Algorithms</h4>
+                <p>Essential graph algorithms every programmer should master...</p>
+            </a>
+            <a href="#" class="related-card">
+                <div class="meta-item" style="margin-bottom: 0.5rem;">
+                    <i data-lucide="calendar" width="16" height="16"></i>
+                    November 3, 2024
+                </div>
+                <h4>Improving Codeforces Rating</h4>
+                <p>Key techniques that helped me improve by 400 points...</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2024 Your Name. Built with HTML, CSS & JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
